@@ -17,5 +17,23 @@ export const styles = StyleSheet.create({
       borderBottomWidth: 1,
       borderBottomColor: '#52528C',
       color: '#212121',
-    }
+    },
+    listContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        marginVertical: 20,
+    },
+    itemContainer: {
+        height: 80,
+        justifyContent: 'center',
+        backgroundColor: '#52528C',
+        borderRadius: 5,
+        marginVertical: 5,
+    },
+    item: {
+        marginHorizontal: 10,
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
   });
