@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { styles } from './styles';
 
 export default function App() {
   return (
@@ -11,22 +12,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    marginHorizontal: 20,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    marginTop: 55,
-    alignItems: 'center',
-    justifyContent: 'space-around'
-  },
-  input: {
-    width: '80%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#52528C',
-    color: '#212121',
-  }
-});
+
