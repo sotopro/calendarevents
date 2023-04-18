@@ -15,18 +15,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  inputContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    marginTop: 55,
     marginHorizontal: 20,
   },
+  inputContainer: {
+    flexDirection: 'row',
+    marginTop: 55,
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
   input: {
-    width: '70%',
+    width: '80%',
     borderBottomWidth: 1,
     borderBottomColor: '#52528C',
-    marginRight: 10,
-    color: '#212121'
+    color: '#212121',
   }
 });
