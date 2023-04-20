@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, Button, TextInput } from 'react-native';
+import { Text, View, Button, TextInput, FlatList } from 'react-native';
 import { styles } from './styles';
 
 export default function App() {
@@ -20,6 +20,12 @@ export default function App() {
 
   console.warn('events', events)
 
+  const renderItem = ({ item }) => (
+    <View style={styles.itemContainer}>
+      <Text style={styles.item}>{item.value}</Text>
+    </View>
+  )
+
 
   return (
     <View style={styles.container}>
@@ -33,15 +39,11 @@ export default function App() {
         <Button title='Add' color='#52528C' onPress={onAddEvent}/>
       </View>
       <View style={styles.listContainer}>
-        {
-          events.map((event) => {
-            return (
-              <View key={event.id} style={styles.itemContainer}>
-                <Text style={styles.item}>{event.value}</Text>
-              </View>
-            )
-          })
-        }
+        <FlatList 
+          renderItem={renderItem}
+          data={events}
+          keyExtractor={(item) => item.id}
+        />
       </View>
     </View>
   );
