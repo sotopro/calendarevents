@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Text, View, Button, TextInput, FlatList } from 'react-native';
+import { Text, View, Button, TextInput, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { styles } from './styles';
 
 export default function App() {
   const [text, setText] = useState('');
   const [events, setEvents] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const onAddEvent = () => {
     if (text.length === 0) return;
@@ -18,12 +20,16 @@ export default function App() {
     setText('');
   }
 
-  console.warn('events', events)
+  const onHandlerEvent = (id) => {
+    setModalVisible(true);
+    const selectedEvent = events.find(event => event.id === id);
+    setSelectedEvent(selectedEvent);
+  }
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={() => onHandlerEvent(item.id)}>
       <Text style={styles.item}>{item.value}</Text>
-    </View>
+    </TouchableOpacity>
   )
 
 
@@ -43,8 +49,10 @@ export default function App() {
           renderItem={renderItem}
           data={events}
           keyExtractor={(item) => item.id}
+          alwaysBounceVertical={false}
         />
       </View>
+      <Modal visible={modalVisible} animationType='slide'></Modal>
     </View>
   );
 }
