@@ -21,9 +21,14 @@ export default function App() {
   }
 
   const onHandlerEvent = (id) => {
-    setModalVisible(true);
+    setModalVisible(!modalVisible);
     const selectedEvent = events.find(event => event.id === id);
     setSelectedEvent(selectedEvent);
+  }
+
+  const onHandlerCancelModal = () => {
+    setModalVisible(!modalVisible);
+    setSelectedEvent(null);
   }
 
   const renderItem = ({ item }) => (
@@ -52,7 +57,27 @@ export default function App() {
           alwaysBounceVertical={false}
         />
       </View>
-      <Modal visible={modalVisible} animationType='slide'></Modal>
+      <Modal visible={modalVisible} animationType='slide'>
+        <View style={styles.modalContainer}>
+          <Text style={styles.modalTitle}>Event Detail</Text>
+          <View style={styles.modalDetailContainer}>
+            <Text style={styles.modalDetailMessage}>Are you sure to delete this item?</Text>
+            <Text style={styles.selectedEvent}>{selectedEvent?.value}</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button 
+              title='Cancel'
+              color='#52528C'
+              onPress={() => onHandlerCancelModal()}
+            />
+            <Button 
+            title='Delete'
+            color='#52528C'
+            onPress={() => null}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
