@@ -31,6 +31,11 @@ export default function App() {
     setSelectedEvent(null);
   }
 
+  const onHandlerDeleteEvent = (id) => {
+    setEvents(events.filter(event => event.id !== id));
+    setModalVisible(!modalVisible);
+  }
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.itemContainer} onPress={() => onHandlerEvent(item.id)}>
       <Text style={styles.item}>{item.value}</Text>
@@ -73,7 +78,7 @@ export default function App() {
             <Button 
             title='Delete'
             color='#52528C'
-            onPress={() => null}
+            onPress={() => onHandlerDeleteEvent(selectedEvent.id)}
             />
           </View>
         </View>
