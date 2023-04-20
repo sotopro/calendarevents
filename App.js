@@ -33,18 +33,15 @@ export default function App() {
         <Button title='Add' color='#52528C' onPress={onAddEvent}/>
       </View>
       <View style={styles.listContainer}>
-        <View style={styles.itemContainer}>
-          <Text style={styles.item}>April Fools</Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.item}>Coca cola Festival</Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.item}>Ultra Festival</Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.item}>Pascua</Text>
-        </View>
+        {
+          events.map((event) => {
+            return (
+              <View key={event.id} style={styles.itemContainer}>
+                <Text style={styles.item}>{event.value}</Text>
+              </View>
+            )
+          })
+        }
       </View>
     </View>
   );
