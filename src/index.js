@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Text, View, Button, TextInput, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { styles } from './styles';
+import { Input } from './components/index';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -21,6 +22,8 @@ export default function App() {
   }
 
   const onHandlerEvent = (id) => {
+    console.log('id', id);
+    console.warn('onHandlerEvent')
     setModalVisible(!modalVisible);
     const selectedEvent = events.find(event => event.id === id);
     setSelectedEvent(selectedEvent);
@@ -45,15 +48,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput 
-          placeholder='Enter your event' 
-          style={styles.input}
-          value={text}
-          onChangeText={(text) => setText(text)}
-        />
-        <Button title='Add' color='#52528C' onPress={onAddEvent}/>
-      </View>
+      <Input 
+        buttonColor='#52528C'
+        buttonTitle='Add'
+        onChangeText={(text) => setText(text)}
+        onHandlerButton={onAddEvent}
+        placeholder='Enter your event' 
+        value={text}
+      />
       <View style={styles.listContainer}>
         <FlatList 
           renderItem={renderItem}
