@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Text, View, Button, TextInput, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { styles } from './styles';
-import { Input } from './components/index';
+import { Events, Input, CustomModal } from './components/index';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -22,8 +22,6 @@ export default function App() {
   }
 
   const onHandlerEvent = (id) => {
-    console.log('id', id);
-    console.warn('onHandlerEvent')
     setModalVisible(!modalVisible);
     const selectedEvent = events.find(event => event.id === id);
     setSelectedEvent(selectedEvent);
@@ -39,11 +37,6 @@ export default function App() {
     setModalVisible(!modalVisible);
   }
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => onHandlerEvent(item.id)}>
-      <Text style={styles.item}>{item.value}</Text>
-    </TouchableOpacity>
-  )
 
 
   return (
@@ -56,35 +49,14 @@ export default function App() {
         placeholder='Enter your event' 
         value={text}
       />
-      <View style={styles.listContainer}>
-        <FlatList 
-          renderItem={renderItem}
-          data={events}
-          keyExtractor={(item) => item.id}
-          alwaysBounceVertical={false}
-        />
-      </View>
-      <Modal visible={modalVisible} animationType='slide'>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Event Detail</Text>
-          <View style={styles.modalDetailContainer}>
-            <Text style={styles.modalDetailMessage}>Are you sure to delete this item?</Text>
-            <Text style={styles.selectedEvent}>{selectedEvent?.value}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button 
-              title='Cancel'
-              color='#52528C'
-              onPress={() => onHandlerCancelModal()}
-            />
-            <Button 
-            title='Delete'
-            color='#52528C'
-            onPress={() => onHandlerDeleteEvent(selectedEvent.id)}
-            />
-          </View>
-        </View>
-      </Modal>
+      <Events events={events} onSelectItem={onHandlerEvent} />
+      <CustomModal 
+        isVisible={modalVisible} 
+        animationType='slide' 
+        onCancel={onHandlerCancelModal} 
+        onDelete={onHandlerDeleteEvent} 
+        selectedEvent={selectedEvent}  
+      />
     </View>
   );
 }
